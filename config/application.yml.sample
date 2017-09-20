@@ -1,0 +1,17 @@
+default: &default
+
+development:
+  <<: *default
+  DB_USERNAME:                   'user'
+  DB_PASSWORD:                   'pass'
+
+test:
+  <<: *default
+  DB_USERNAME:                   'user'
+  DB_PASSWORD:                   'pass'
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
