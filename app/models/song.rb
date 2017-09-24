@@ -13,6 +13,10 @@ class Song < ApplicationRecord
 
   before_validation :add_genre
 
+  def single?
+    albums.empty?
+  end
+
   private
 
   def add_genre
