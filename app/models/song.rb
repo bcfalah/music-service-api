@@ -1,6 +1,5 @@
 class Song < ApplicationRecord
   belongs_to :genre
-
   # songs without albums are singles
   has_many :album_songs, dependent: :destroy
   has_many :albums, through: :album_songs
@@ -8,5 +7,15 @@ class Song < ApplicationRecord
   has_many :playlist_songs, dependent: :destroy
   has_many :playlists, through: :playlist_songs
 
-  # TODO receive genre_name and create genre if it doesn't exist
+  validates_presence_of :name, :duration, :genre_name
+
+  attr_accessor :genre_name
+
+  before_validation :add_genre
+
+  private
+
+  def add_genre
+    self.genre = Genre.find_or_initialize_by(name: genre_name)
+  end
 end

@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20170924164328) do
     t.string "name"
     t.integer "duration"
     t.integer "genre_id"
-    t.boolean "featured"
+    t.boolean "featured", default: false
     t.string "featured_hero_image_file_name"
     t.string "featured_hero_image_content_type"
     t.integer "featured_hero_image_file_size"
