@@ -10,9 +10,8 @@ RSpec.describe 'Api::V1::Artists', type: :request do
     before { api_get '/artists' }
 
     it 'returns artists' do
-      # Note `json` is a custom helper to parse JSON responses
-      expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json_response).not_to be_empty
+      expect(json_response.size).to eq(10)
     end
 
     it 'returns status code 200' do
@@ -26,8 +25,8 @@ RSpec.describe 'Api::V1::Artists', type: :request do
 
     context 'when the record exists' do
       it 'returns the artist' do
-        expect(json).not_to be_empty
-        expect(json['id']).to eq(artist_id)
+        expect(json_response).not_to be_empty
+        expect(json_response['id']).to eq(artist_id)
       end
 
       it 'returns status code 200' do
@@ -56,8 +55,8 @@ RSpec.describe 'Api::V1::Artists', type: :request do
     context 'when the request is valid' do
       before { api_post '/artists', params: valid_attributes }
 
-      it 'creates a artist' do
-        expect(json['name']).to eq(artist_name)
+      it 'creates an artist' do
+        expect(json_response['name']).to eq(artist_name)
       end
 
       it 'returns status code 201' do
