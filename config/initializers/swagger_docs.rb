@@ -5,7 +5,7 @@ class Swagger::Docs::Config
   end
 end
 
-Swagger::Docs::Config.base_api_controller = Api::V1::ApiController
+Swagger::Docs::Config.base_api_controller = ActionController::API
 
 Swagger::Docs::Config.register_apis({
   "1.0" => {
@@ -18,7 +18,7 @@ Swagger::Docs::Config.register_apis({
     :clean_directory => true,
     # As we are using Rails-API, our ApplicationController inherits ActionController::API instead of ActionController::Base
     # Hence, we need to add ActionController::API instead of default ActionController::Base
-    parent_controller: Api::V1::ApiController,
+    #parent_controller: Api::V1::ApiController,
     # parent_controller needs to be specified if API controllers are inheriting some other controller than ApplicationController
     # :parent_controller => ApplicationController,
     :attributes => {
