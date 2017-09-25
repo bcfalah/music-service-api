@@ -22,3 +22,5 @@
 
 # Ignore application configuration
 /config/application.yml
+/public/apidocs/api-docs.json
+/public/apidocs/api/

@@ -1,37 +1,42 @@
-class Api::V1::ArtistsController < ApplicationController
+class Api::V1::ArtistsController < Api::V1::ApiController
   before_action :set_artist, only: [:show, :update, :destroy]
 
-  # GET /api/v1/artists
+  swagger_controller :artists, "Artist Management"
+
   def index
     @artists = Artist.all
     json_response @artists
   end
 
-  # GET /api/v1/artists/1
   def show
     json_response @artist
   end
 
-  # POST /api/v1/artists
+  swagger_api :create do
+    summary "To create an artist"
+    param :form, "name", :string, :required, "Name of the artist"
+    param :form, "biography", :string, :optional, "Biography of the artist"
+    response :success
+    response :unprocessable_entity
+  end
+
   def create
     @artist = Artist.create!(artist_params)
     json_response @artist, :created
   end
 
-  # PATCH/PUT /api/v1/artists/1
   def update
     @artist.update!(artist_params)
     head :no_content
   end
 
-  # DELETE /api/v1/artists/1
   def destroy
     @artist.destroy
     head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
   def set_artist
     @artist = Artist.find(params[:id])
   end
