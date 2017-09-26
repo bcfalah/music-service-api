@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :album do
     name { FFaker::Music.album }
-    artwork { File.new("#{Rails.root}/spec/support/data/abbey_road.jpg") }
+    artwork_url { "https://images.fineartamerica.com/images-medium-large-5/the-beatles-abbey-road-artwork-sheraz-a.jpg" }
   end
 end
