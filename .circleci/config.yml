@@ -28,7 +28,7 @@ jobs:
       # Database setup
       # Add a password to the `ubuntu` user, since Postgres is configured to
       # always ask for a password without sudo, and fails without one.
-      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';”
+      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password `ubuntu`;”
       - run: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
 
       - run: bundle exec rake db:create
