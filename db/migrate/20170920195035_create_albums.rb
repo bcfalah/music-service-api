@@ -3,7 +3,7 @@ class CreateAlbums < ActiveRecord::Migration[5.1]
     create_table :albums do |t|
       t.string :name
       t.integer :artist_id, foreign_key: true, index: true
-      t.attachment :artwork
+      t.string :artwork_url
       t.timestamps
     end
   end

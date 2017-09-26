@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926184807) do
+ActiveRecord::Schema.define(version: 20170924164328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 20170926184807) do
   create_table "albums", force: :cascade do |t|
     t.string "name"
     t.integer "artist_id"
+    t.string "artwork_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "artwork_url"
     t.index ["artist_id"], name: "index_albums_on_artist_id"
   end
 
@@ -66,10 +66,7 @@ ActiveRecord::Schema.define(version: 20170926184807) do
     t.integer "duration"
     t.integer "genre_id"
     t.boolean "featured", default: false
-    t.string "featured_hero_image_file_name"
-    t.string "featured_hero_image_content_type"
-    t.integer "featured_hero_image_file_size"
-    t.datetime "featured_hero_image_updated_at"
+    t.string "featured_hero_image_url"
     t.text "featured_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
