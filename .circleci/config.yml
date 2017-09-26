@@ -7,7 +7,7 @@ jobs:
       - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/music_api_test"
+          DATABASE_URL: "postgres://ubuntu:ubuntu@localhost:5432/music_api_test"
       - image: circleci/postgres:9.4.12-alpine
     steps:
       - checkout
@@ -26,6 +26,12 @@ jobs:
             - vendor/bundle
 
       # Database setup
+      - run:
+        # Add a password to the `ubuntu` user, since Postgres is configured to
+        # always ask for a password without sudo, and fails without one.
+        command: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';”
+        command: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
+
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
