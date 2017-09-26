@@ -6,6 +6,10 @@
     {
       "path": "/apidocs/api/v1/artists.{format}",
       "description": "Artist Management"
+    },
+    {
+      "path": "/apidocs/api/v1/albums.{format}",
+      "description": "Album Management"
     }
   ],
   "authorizations": null,
