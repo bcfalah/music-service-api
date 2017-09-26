@@ -16,7 +16,7 @@ class Api::V1::ArtistsController < ApplicationController
   swagger_api :show do
     summary "Fetches a single Artist"
     param :path, :id, :integer, :required, "Artist Id"
-    response :ok, "Success", :Artist
+    response :ok
     response :not_found
     response :unprocessable_entity
   end
