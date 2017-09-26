@@ -10,6 +10,11 @@ jobs:
           DATABASE_URL: "postgres://ubuntu:ubuntu@localhost:5432/music_api_test"
       - image: circleci/postgres:9.4.12-alpine
     steps:
+      - machine
+          pre:
+            - sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
+            - sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
+
       - checkout
 
       # Restore bundle cache
@@ -24,12 +29,6 @@ jobs:
           key: music-service-api-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
-      # Database setup
-      # Add a password to the `ubuntu` user, since Postgres is configured to
-      # always ask for a password without sudo, and fails without one.
-      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
-      - run: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
 
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
