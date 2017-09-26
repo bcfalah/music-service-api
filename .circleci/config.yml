@@ -7,14 +7,9 @@ jobs:
       - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
-          DATABASE_URL: "postgres://ubuntu:ubuntu@localhost:5432/music_api_test"
+          DATABASE_URL: "postgres://root:circleci_test@localhost:5432/music_api_test"
       - image: circleci/postgres:9.4.12-alpine
     steps:
-      - machine
-          pre:
-            - sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
-            - sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
-
       - checkout
 
       # Restore bundle cache
