@@ -22,7 +22,7 @@ class Api::V1::AlbumsController < ApplicationController
   end
 
   def show
-    json_response @album
+    json_response @album, :ok, serializer: AlbumCompleteSerializer
   end
 
   swagger_api :create do
@@ -37,7 +37,7 @@ class Api::V1::AlbumsController < ApplicationController
 
   def create
     @album = Album.create!(album_params)
-    json_response @album, :created
+    json_response @album, :created, serializer: AlbumCompleteSerializer
   end
 
   swagger_api :update do
@@ -91,7 +91,7 @@ class Api::V1::AlbumsController < ApplicationController
     response :not_found
     response :unprocessable_entity
   end
-  
+
   def destroy
     @album.destroy
     head :no_content

@@ -22,7 +22,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def show
-    json_response @artist
+    json_response @artist, :ok, serializer: ArtistCompleteSerializer
   end
 
   swagger_api :create do
@@ -36,7 +36,7 @@ class Api::V1::ArtistsController < ApplicationController
 
   def create
     @artist = Artist.create!(artist_params)
-    json_response @artist, :created
+    json_response @artist, :created, serializer: ArtistCompleteSerializer
   end
 
   swagger_api :update do
