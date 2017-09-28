@@ -1,14 +1,14 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://music-api-production.herokuapp.com",
+  "basePath": "public",
   "resourcePath": "artists",
   "apis": [
     {
       "path": "/api/v1/artists",
       "operations": [
         {
-          "summary": "Fetches all artists ordered by Id",
+          "summary": "Fetches all artists",
           "responseMessages": [
             {
               "code": 200,
@@ -104,7 +104,7 @@
       "path": "/api/v1/artists/{id}",
       "operations": [
         {
-          "summary": "Updates an existing Artist",
+          "summary": "Updates an existing User",
           "responseMessages": [
             {
               "code": 204,
@@ -154,7 +154,7 @@
       "path": "/api/v1/artists/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Artist item",
+          "summary": "Deletes an existing User item",
           "responseMessages": [
             {
               "code": 204,

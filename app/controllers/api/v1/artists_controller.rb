@@ -4,12 +4,12 @@ class Api::V1::ArtistsController < ApplicationController
   swagger_controller :artists, "Artist Management"
 
   swagger_api :index do
-    summary "Fetches all artists"
+    summary "Fetches all artists ordered by Id"
     response :ok
   end
 
   def index
-    @artists = Artist.all
+    @artists = Artist.order(:id).all
     json_response @artists
   end
 
@@ -40,10 +40,10 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   swagger_api :update do
-    summary "Updates an existing User"
+    summary "Updates an existing Artist"
     param :path, :id, :integer, :required, "Artist Id"
-    param :form, "name", :string, :required, "Name of the artist"
-    param :form, "biography", :string, :optional, "Biography of the artist"
+    param :form, "name", :optional, :required, "Name of the artist"
+    param :form, "biography", :optional, :optional, "Biography of the artist"
     response :no_content
     response :not_found
     response :unprocessable_entity
@@ -55,7 +55,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   swagger_api :destroy do
-    summary "Deletes an existing User item"
+    summary "Deletes an existing Artist item"
     param :path, :id, :integer, :required, "Artist Id"
     response :no_content
     response :not_found
@@ -63,7 +63,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def destroy
-    @artist.destroy
+    @artist.destroy!
     head :no_content
   end
 

@@ -10,5 +10,9 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordInvalid do |e|
       json_response({ message: e.message }, :unprocessable_entity)
     end
+
+    rescue_from ActiveRecord::RecordNotDestroyed do |e|
+      json_response({ message: e.message }, :internal_server_error)
+    end
   end
 end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :artist do
-    name { FFaker::Music.artist }
+    sequence(:name) {|n| FFaker::Music.artist + " (#{n})"}
     biography { FFaker::Lorem.paragraphs(6).join(" ") }
   end
 end

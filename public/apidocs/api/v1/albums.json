@@ -8,7 +8,7 @@
       "path": "/api/v1/albums",
       "operations": [
         {
-          "summary": "Fetches all albums",
+          "summary": "Fetches all albums ordered by Id",
           "responseMessages": [
             {
               "code": 200,
@@ -57,6 +57,13 @@
               "type": "integer",
               "description": "Artist ID of the album",
               "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "artwork_url",
+              "type": "string",
+              "description": "URL of the album's artwork",
+              "required": false
             }
           ],
           "nickname": "Api::V1::Albums#create",
@@ -72,8 +79,8 @@
           "responseMessages": [
             {
               "code": 200,
-              "responseModel": "Album",
-              "message": "Success"
+              "responseModel": null,
+              "message": "Ok"
             },
             {
               "code": 404,
@@ -135,14 +142,21 @@
               "name": "name",
               "type": "string",
               "description": "Name of the album",
-              "required": true
+              "required": false
             },
             {
               "paramType": "form",
               "name": "artist_id",
               "type": "integer",
               "description": "Artist ID of the album",
-              "required": true
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "artwork_url",
+              "type": "string",
+              "description": "URL of the album's artwork",
+              "required": false
             }
           ],
           "nickname": "Api::V1::Albums#update",
@@ -154,7 +168,7 @@
       "path": "/api/v1/albums/{id}",
       "operations": [
         {
-          "summary": "Deletes an existing Album item",
+          "summary": "Deletes an existing Album",
           "responseMessages": [
             {
               "code": 204,
