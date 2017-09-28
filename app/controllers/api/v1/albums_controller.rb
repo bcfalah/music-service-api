@@ -1,5 +1,5 @@
 class Api::V1::AlbumsController < ApplicationController
-  before_action :set_artist, only: [:show, :update, :destroy]
+  before_action :set_album, only: [:show, :update, :add_song, :delete_song, :destroy]
 
   swagger_controller :albums, "Album Management"
 
@@ -56,14 +56,42 @@ class Api::V1::AlbumsController < ApplicationController
     head :no_content
   end
 
-  swagger_api :destroy do
-    summary "Deletes an existing Album"
+  swagger_api :add_song do
+    summary "Adds a song to the album"
     param :path, :id, :integer, :required, "Album Id"
+    param :form, "song_id", :integer, :optional, "Id of the song to add to the album"
     response :no_content
     response :not_found
     response :unprocessable_entity
   end
 
+  def add_song
+    @album.add_song!(add_song_params[:song_id])
+    head :no_content
+  end
+
+  swagger_api :delete_song do
+    summary "Deletes a song from the album"
+    param :path, :id, :integer, :required, "Album Id"
+    param :form, "song_id", :integer, :optional, "Id of the song to delete from the album"
+    response :no_content
+    response :not_found
+    response :unprocessable_entity
+  end
+
+  def delete_song
+    @album.delete_song!(delete_song_params[:song_id])
+    head :no_content
+  end
+
+  swagger_api :destroy do
+    summary "Deletes an existing Album"
+    param :path, :id, :integer, :required, "Album Id"
+    response :no_content, "Deleted"
+    response :not_found
+    response :unprocessable_entity
+  end
+  
   def destroy
     @album.destroy
     head :no_content
@@ -71,11 +99,19 @@ class Api::V1::AlbumsController < ApplicationController
 
   private
 
-  def set_artist
+  def set_album
     @album = Album.find(params[:id])
   end
 
   def album_params
     params.permit(:name, :artist_id, :artwork)
+  end
+
+  def add_song_params
+    params.permit(:song_id)
+  end
+
+  def delete_song_params
+    params.permit(:song_id)
   end
 end

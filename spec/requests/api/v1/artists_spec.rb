@@ -35,7 +35,7 @@ RSpec.describe 'Api::V1::Artists', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:artist_id) { 100 }
+      let(:artist_id) { "not_exists" }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)

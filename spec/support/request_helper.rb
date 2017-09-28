@@ -4,6 +4,10 @@ module RequestHelper
     JSON.parse(response.body)
   end
 
+  def json_response_hash
+    json_response.with_indifferent_access
+  end
+
   def api_get action, params={}, version="1"
     get "/api/v#{version}/#{action}", params
   end

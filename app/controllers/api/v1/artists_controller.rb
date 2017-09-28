@@ -57,7 +57,7 @@ class Api::V1::ArtistsController < ApplicationController
   swagger_api :destroy do
     summary "Deletes an existing Artist item"
     param :path, :id, :integer, :required, "Artist Id"
-    response :no_content
+    response :no_content, "Deleted"
     response :not_found
     response :unprocessable_entity
   end

@@ -4,7 +4,18 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :artists
-      resources :albums
+      resources :songs do
+        member do
+          put :feature
+          put :unfeature
+        end
+      end
+      resources :albums do
+        member do
+          put :add_song
+          put :delete_song
+        end
+      end
     end
   end
 end

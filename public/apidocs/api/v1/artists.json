@@ -159,7 +159,7 @@
             {
               "code": 204,
               "responseModel": null,
-              "message": "No Content"
+              "message": "Deleted"
             },
             {
               "code": 404,

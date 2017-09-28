@@ -8,6 +8,10 @@
       "description": "Artist Management"
     },
     {
+      "path": "/apidocs/api/v1/songs.{format}",
+      "description": "Song Management"
+    },
+    {
       "path": "/apidocs/api/v1/albums.{format}",
       "description": "Album Management"
     }

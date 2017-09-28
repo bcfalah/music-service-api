@@ -41,3 +41,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'figaro'
 gem 'swagger-docs'
 gem 'rack-cors'
+gem 'active_model_serializers', '~> 0.10.0'
