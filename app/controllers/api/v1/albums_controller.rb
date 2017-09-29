@@ -59,7 +59,7 @@ class Api::V1::AlbumsController < ApplicationController
   swagger_api :add_song do
     summary "Adds a song to the album"
     param :path, :id, :integer, :required, "Album Id"
-    param :form, "song_id", :integer, :optional, "Id of the song to add to the album"
+    param :form, "song_id", :integer, :required, "Id of the song to add to the album"
     response :no_content
     response :not_found
     response :unprocessable_entity
@@ -73,7 +73,7 @@ class Api::V1::AlbumsController < ApplicationController
   swagger_api :delete_song do
     summary "Deletes a song from the album"
     param :path, :id, :integer, :required, "Album Id"
-    param :form, "song_id", :integer, :optional, "Id of the song to delete from the album"
+    param :form, "song_id", :integer, :required, "Id of the song to delete from the album"
     response :no_content
     response :not_found
     response :unprocessable_entity

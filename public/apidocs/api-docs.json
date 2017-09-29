@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://music-api-production.herokuapp.com",
+  "basePath": "/",
   "apis": [
     {
       "path": "/apidocs/api/v1/artists.{format}",
@@ -14,6 +14,10 @@
     {
       "path": "/apidocs/api/v1/albums.{format}",
       "description": "Album Management"
+    },
+    {
+      "path": "/apidocs/api/v1/playlists.{format}",
+      "description": "Playlist Management"
     }
   ],
   "authorizations": null,

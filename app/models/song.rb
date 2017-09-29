@@ -15,6 +15,7 @@ class Song < ApplicationRecord
   attr_accessor :genre_name, :owner_id, :featured_artist_id
 
   validates_presence_of :name, :duration
+  validates :duration, :numericality => { only_integer: true, greater_than: 0 }
   validates_presence_of :genre_name, :owner_id, on: :create
   validate :owner_exists?
   validate :featured_artist_exists, on: :feature
