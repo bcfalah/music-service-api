@@ -1,0 +1,191 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "public",
+  "resourcePath": "artists",
+  "apis": [
+    {
+      "path": "/api/v1/artists",
+      "operations": [
+        {
+          "summary": "Fetches all artists",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            }
+          ],
+          "nickname": "Api::V1::Artists#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/artists",
+      "operations": [
+        {
+          "summary": "Creates an artist",
+          "responseMessages": [
+            {
+              "code": 201,
+              "responseModel": null,
+              "message": "Created"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "name",
+              "type": "string",
+              "description": "Name of the artist",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "biography",
+              "type": "string",
+              "description": "Biography of the artist",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Artists#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/artists/{id}",
+      "operations": [
+        {
+          "summary": "Fetches a single Artist",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Artists#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/artists/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing User",
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "No Content"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "name",
+              "type": "optional",
+              "description": "Name of the artist",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "biography",
+              "type": "optional",
+              "description": "Biography of the artist",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Artists#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/artists/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing User item",
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "No Content"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Artists#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

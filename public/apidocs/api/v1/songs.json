@@ -1,0 +1,319 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://music-api-production.herokuapp.com",
+  "resourcePath": "songs",
+  "apis": [
+    {
+      "path": "/api/v1/songs/{id}/feature",
+      "operations": [
+        {
+          "summary": "Makes a song featured, adding a new artist to it and setting optional featured attributes",
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "No Content"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Song Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "featured_artist_id",
+              "type": "integer",
+              "description": "Id of the featured artist, only required if the song already hasn't at least one",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "featured_hero_image_url",
+              "type": "string",
+              "description": "URL of the featured image",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "featured_text",
+              "type": "string",
+              "description": "Extra text to describe or promote the featured song",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Songs#feature",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/songs/{id}/unfeature",
+      "operations": [
+        {
+          "summary": "Deletes an artist from the featured collection of the song and unsets its featured attributes if no remaining featured artist",
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "No Content"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Song Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "unfeatured_artist_id",
+              "type": "integer",
+              "description": "Id of the featured artist to delete from the collection of featured artists",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Songs#unfeature",
+          "method": "put"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/songs",
+      "operations": [
+        {
+          "summary": "Fetches all songs ordered by Id",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            }
+          ],
+          "nickname": "Api::V1::Songs#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/songs",
+      "operations": [
+        {
+          "summary": "Creates a song",
+          "responseMessages": [
+            {
+              "code": 201,
+              "responseModel": null,
+              "message": "Created"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "name",
+              "type": "string",
+              "description": "Name of the song",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "duration",
+              "type": "integer",
+              "description": "Duration of the song",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "genre_name",
+              "type": "string",
+              "description": "Name of the song genre (it will be created if doesn't exist)",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "owner_id",
+              "type": "integer",
+              "description": "Id of the song's owner (must be an existing artist Id)",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Songs#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/songs/{id}",
+      "operations": [
+        {
+          "summary": "Fetches a single Song",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": null,
+              "message": "Ok"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Song Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Songs#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/songs/{id}",
+      "operations": [
+        {
+          "summary": "Updates an existing Song",
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "No Content"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Song Id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "name",
+              "type": "string",
+              "description": "Name of the song",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "duration",
+              "type": "integer",
+              "description": "Duration of the song",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "genre_name",
+              "type": "string",
+              "description": "Name of the song genre (it will be created if doesn't exist)",
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "owner_id",
+              "type": "integer",
+              "description": "Id of the song's owner (must be an existing artist Id)",
+              "required": false
+            }
+          ],
+          "nickname": "Api::V1::Songs#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/songs/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an existing Song item",
+          "responseMessages": [
+            {
+              "code": 204,
+              "responseModel": null,
+              "message": "Deleted"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 422,
+              "responseModel": null,
+              "message": "Unprocessable Entity"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Song Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::Songs#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

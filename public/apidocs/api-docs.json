@@ -1,0 +1,27 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://music-api-production.herokuapp.com",
+  "apis": [
+    {
+      "path": "/apidocs/api/v1/artists.{format}",
+      "description": "Artist Management"
+    },
+    {
+      "path": "/apidocs/api/v1/songs.{format}",
+      "description": "Song Management"
+    },
+    {
+      "path": "/apidocs/api/v1/albums.{format}",
+      "description": "Album Management"
+    }
+  ],
+  "authorizations": null,
+  "info": {
+    "title": "Music Service API Documentation",
+    "description": "Interactive documentation for Music Service API",
+    "contact": "",
+    "license": "Apache 2.0",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  }
+}

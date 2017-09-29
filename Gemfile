@@ -39,5 +39,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Simple, Heroku-friendly Rails app configuration using ENV and a single YAML file
 gem 'figaro'
-gem 'aws-sdk', '~> 2'
-gem 'paperclip', '~> 5.1.0'
+gem 'swagger-docs'
+gem 'rack-cors'
+gem 'active_model_serializers', '~> 0.10.0'

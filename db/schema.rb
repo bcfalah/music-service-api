@@ -10,34 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924164328) do
+ActiveRecord::Schema.define(version: 20170928022219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "album_songs", force: :cascade do |t|
-    t.bigint "album_id"
-    t.bigint "song_id"
+    t.bigint "album_id", null: false
+    t.bigint "song_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["album_id", "song_id"], name: "index_album_songs_on_album_id_and_song_id", unique: true
     t.index ["album_id"], name: "index_album_songs_on_album_id"
     t.index ["song_id"], name: "index_album_songs_on_song_id"
   end
 
   create_table "albums", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "artist_id"
-    t.string "artwork_file_name"
-    t.string "artwork_content_type"
-    t.integer "artwork_file_size"
-    t.datetime "artwork_updated_at"
+    t.string "artwork_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["artist_id", "name"], name: "index_albums_on_artist_id_and_name", unique: true
     t.index ["artist_id"], name: "index_albums_on_artist_id"
   end
 
+  create_table "artist_songs", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.bigint "song_id", null: false
+    t.boolean "owner", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id", "song_id"], name: "index_artist_songs_on_artist_id_and_song_id", unique: true
+    t.index ["artist_id"], name: "index_artist_songs_on_artist_id"
+    t.index ["song_id"], name: "index_artist_songs_on_song_id"
+  end
+
   create_table "artists", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "biography"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,10 +60,11 @@ ActiveRecord::Schema.define(version: 20170924164328) do
   end
 
   create_table "playlist_songs", force: :cascade do |t|
-    t.bigint "playlist_id"
-    t.bigint "song_id"
+    t.bigint "playlist_id", null: false
+    t.bigint "song_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["playlist_id", "song_id"], name: "index_playlist_songs_on_playlist_id_and_song_id", unique: true
     t.index ["playlist_id"], name: "index_playlist_songs_on_playlist_id"
     t.index ["song_id"], name: "index_playlist_songs_on_song_id"
   end
@@ -69,10 +80,7 @@ ActiveRecord::Schema.define(version: 20170924164328) do
     t.integer "duration"
     t.integer "genre_id"
     t.boolean "featured", default: false
-    t.string "featured_hero_image_file_name"
-    t.string "featured_hero_image_content_type"
-    t.integer "featured_hero_image_file_size"
-    t.datetime "featured_hero_image_updated_at"
+    t.string "featured_hero_image_url"
     t.text "featured_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,6 +88,8 @@ ActiveRecord::Schema.define(version: 20170924164328) do
 
   add_foreign_key "album_songs", "albums"
   add_foreign_key "album_songs", "songs"
+  add_foreign_key "artist_songs", "artists"
+  add_foreign_key "artist_songs", "songs"
   add_foreign_key "playlist_songs", "playlists"
   add_foreign_key "playlist_songs", "songs"
 end

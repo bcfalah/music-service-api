@@ -5,7 +5,7 @@ class CreateSongs < ActiveRecord::Migration[5.1]
       t.integer :duration
       t.integer :genre_id
       t.boolean :featured, default: false
-      t.attachment :featured_hero_image
+      t.string :featured_hero_image_url
       t.text :featured_text
       t.timestamps
     end
