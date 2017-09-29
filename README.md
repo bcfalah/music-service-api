@@ -10,6 +10,7 @@ API for a great music streaming service
 1. Install postgresql and make sure it's running
 1. Configure application database: `cp ./config/database.yml.sample ./config/database.yml` and customize as required
 1. Run application setup: `./bin/setup` (It will install dependencies and prepare the database, among other things)
+1. Verify that all the tests are ok by running `bundle exec rspec spec`
 1. Start the application: `bundle exec rails server`
 
 **Applying updates:** Running `./bin/update` will apply missing updates
@@ -26,8 +27,8 @@ API for a great music streaming service
 
 ## API Documentation
 
-1. Generate documentation running `SD_LOG_LEVEL=1 rake swagger:docs`
-1. Run server and access to `/docs` to view the Swagger interactive documentation
+1. Generate documentation running `bundle exec rake documentation:generate`
+1. Run server and access to the root to view the Swagger interactive documentation
 
 ## Deployment
 
