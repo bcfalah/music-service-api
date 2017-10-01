@@ -104,7 +104,7 @@ class Api::V1::AlbumsController < ApplicationController
   end
 
   def album_params
-    params.permit(:name, :artist_id, :artwork)
+    params.permit(:name, :artist_id, :artwork_url)
   end
 
   def add_song_params

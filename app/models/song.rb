@@ -16,6 +16,9 @@ class Song < ApplicationRecord
 
   validates_presence_of :name, :duration
   validates :duration, :numericality => { only_integer: true, greater_than: 0 }
+  validates :featured_hero_image_url, :format => URI::regexp(%w(http https)),
+    if: Proc.new { |song| song.featured_hero_image_url.present? }
+
   validates_presence_of :genre_name, :owner_id, on: :create
   validate :owner_exists?
   validate :featured_artist_exists, on: :feature

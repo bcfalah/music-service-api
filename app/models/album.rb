@@ -5,6 +5,8 @@ class Album < ApplicationRecord
 
   validates_presence_of :name, :artist
   validates_uniqueness_of :artist, scope: :name, case_sensitive: false, message: 'already has an album with this name'
+  validates :artwork_url, :format => URI::regexp(%w(http https)),
+  if: Proc.new { |album| album.artwork_url.present? }
 
   def add_song!(song_id)
     self.album_songs.create!(song_id: song_id)
