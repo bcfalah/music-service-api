@@ -42,7 +42,7 @@ class Api::V1::ArtistsController < ApplicationController
   swagger_api :update do
     summary "Updates an existing Artist"
     param :path, :id, :integer, :required, "Artist Id"
-    param :form, "name", :optional, :required, "Name of the artist"
+    param :form, "name", :optional, "Name of the artist"
     param :form, "biography", :optional, :optional, "Biography of the artist"
     response :no_content
     response :not_found

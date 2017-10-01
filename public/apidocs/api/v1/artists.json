@@ -134,8 +134,8 @@
               "paramType": "form",
               "name": "name",
               "type": "optional",
-              "description": "Name of the artist",
-              "required": true
+              "description": null,
+              "required": false
             },
             {
               "paramType": "form",
