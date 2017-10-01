@@ -133,14 +133,14 @@
             {
               "paramType": "form",
               "name": "name",
-              "type": "optional",
-              "description": null,
+              "type": "string",
+              "description": "Name of the artist",
               "required": false
             },
             {
               "paramType": "form",
               "name": "biography",
-              "type": "optional",
+              "type": "string",
               "description": "Biography of the artist",
               "required": false
             }
