@@ -1,5 +1,5 @@
 class Api::V1::AlbumsController < ApplicationController
-  before_action :set_album, only: [:show, :update, :add_song, :delete_song, :destroy]
+  before_action :set_album, only: [:show, :update, :add_songs, :delete_songs, :destroy]
 
   swagger_controller :albums, "Album Management"
 
@@ -56,31 +56,31 @@ class Api::V1::AlbumsController < ApplicationController
     head :no_content
   end
 
-  swagger_api :add_song do
-    summary "Adds a song to the album"
+  swagger_api :add_songs do
+    summary "Adds one or many songs to an album"
     param :path, :id, :integer, :required, "Album Id"
-    param :form, "song_id", :integer, :required, "Id of the song to add to the album"
+    param :form, "song_ids", :string, :required, "Comma separated Ids of the songs to add to the album"
     response :no_content
     response :not_found
     response :unprocessable_entity
   end
 
-  def add_song
-    @album.add_song!(add_song_params[:song_id])
+  def add_songs
+    @album.add_songs!(add_songs_params[:song_ids].split(','))
     head :no_content
   end
 
-  swagger_api :delete_song do
-    summary "Deletes a song from the album"
+  swagger_api :delete_songs do
+    summary "Deletes one or many songs from the album"
     param :path, :id, :integer, :required, "Album Id"
-    param :form, "song_id", :integer, :required, "Id of the song to delete from the album"
+    param :form, "song_ids", :integer, :required, "Comma separated Ids of the songs to delete from the album"
     response :no_content
     response :not_found
     response :unprocessable_entity
   end
 
-  def delete_song
-    @album.delete_song!(delete_song_params[:song_id])
+  def delete_songs
+    @album.delete_songs!(delete_songs_params[:song_ids].split(','))
     head :no_content
   end
 
@@ -107,11 +107,11 @@ class Api::V1::AlbumsController < ApplicationController
     params.permit(:name, :artist_id, :artwork_url)
   end
 
-  def add_song_params
-    params.permit(:song_id)
+  def add_songs_params
+    params.permit(:song_ids)
   end
 
-  def delete_song_params
-    params.permit(:song_id)
+  def delete_songs_params
+    params.permit(:song_ids)
   end
 end

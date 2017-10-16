@@ -8,11 +8,14 @@ class Album < ApplicationRecord
   validates :artwork_url, :format => URI::regexp(%w(http https)),
   if: Proc.new { |album| album.artwork_url.present? }
 
-  def add_song!(song_id)
-    self.album_songs.create!(song_id: song_id)
+  def add_songs!(song_ids)
+    song_ids.each do |song_id|
+      self.album_songs.build(song_id: song_id)
+    end
+    self.save!
   end
 
-  def delete_song!(song_id)
-    self.album_songs.where(song_id: song_id).destroy_all
+  def delete_songs!(song_ids)
+    self.album_songs.where(song_id: song_ids).destroy_all
   end
 end

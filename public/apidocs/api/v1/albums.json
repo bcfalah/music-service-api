@@ -5,10 +5,10 @@
   "resourcePath": "albums",
   "apis": [
     {
-      "path": "/api/v1/albums/{id}/add_song",
+      "path": "/api/v1/albums/{id}/add_songs",
       "operations": [
         {
-          "summary": "Adds a song to the album",
+          "summary": "Adds one or many songs to an album",
           "responseMessages": [
             {
               "code": 204,
@@ -36,22 +36,22 @@
             },
             {
               "paramType": "form",
-              "name": "song_id",
-              "type": "integer",
-              "description": "Id of the song to add to the album",
+              "name": "song_ids",
+              "type": "string",
+              "description": "Comma separated Ids of the songs to add to the album",
               "required": true
             }
           ],
-          "nickname": "Api::V1::Albums#add_song",
+          "nickname": "Api::V1::Albums#add_songs",
           "method": "put"
         }
       ]
     },
     {
-      "path": "/api/v1/albums/{id}/delete_song",
+      "path": "/api/v1/albums/{id}/delete_songs",
       "operations": [
         {
-          "summary": "Deletes a song from the album",
+          "summary": "Deletes one or many songs from the album",
           "responseMessages": [
             {
               "code": 204,
@@ -79,13 +79,13 @@
             },
             {
               "paramType": "form",
-              "name": "song_id",
+              "name": "song_ids",
               "type": "integer",
-              "description": "Id of the song to delete from the album",
+              "description": "Comma separated Ids of the songs to delete from the album",
               "required": true
             }
           ],
-          "nickname": "Api::V1::Albums#delete_song",
+          "nickname": "Api::V1::Albums#delete_songs",
           "method": "put"
         }
       ]

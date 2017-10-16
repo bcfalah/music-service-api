@@ -97,17 +97,19 @@ RSpec.describe 'Api::V1::Albums', type: :request do
     end
   end
 
-  describe 'PUT /albums/:id/add_song' do
+  describe 'PUT /albums/:id/add_songs' do
     let!(:new_song) { create(:song, owner_id: artist.id) }
+    let!(:new_song2) { create(:song, owner_id: artist.id) }
     let(:new_song_id) { new_song.id }
+    let(:new_song_id2) { new_song2.id }
     let(:attributes) {
       {
-        song_id: new_song_id
+        song_ids: "#{new_song_id}, #{new_song_id2}"
       }
     }
 
-    context 'when the album does not have the song' do
-      before { api_put "/albums/#{album_id}/add_song", params: attributes }
+    context 'when the album does not have the songs' do
+      before { api_put "/albums/#{album_id}/add_songs", params: attributes }
 
       it 'should respond with no content' do
         expect(response.body).to be_empty
@@ -119,15 +121,15 @@ RSpec.describe 'Api::V1::Albums', type: :request do
 
       it 'should add a new song to the album' do
         album.reload
-        expect(album.songs.count).to eq(1)
-        expect(album.songs.last).to eq(new_song)
+        expect(album.songs.count).to eq(2)
+        expect(album.songs.last).to eq(new_song2)
       end
     end
 
     context 'when the album already has the song' do
       before do
-        album.add_song!(new_song_id)
-        api_put "/albums/#{album_id}/add_song", params: attributes
+        album.add_songs!([new_song_id])
+        api_put "/albums/#{album_id}/add_songs", params: attributes
       end
 
       it 'returns a validation failure message' do
@@ -146,12 +148,12 @@ RSpec.describe 'Api::V1::Albums', type: :request do
     end
   end
 
-  describe 'PUT /albums/:id/delete_song' do
+  describe 'PUT /albums/:id/delete_songs' do
     let!(:added_song) { create(:song, owner_id: artist.id) }
     let(:added_song_id) { added_song.id }
     let(:attributes) {
       {
-        song_id: added_song_id
+        song_ids: added_song_id
       }
     }
 
@@ -170,8 +172,8 @@ RSpec.describe 'Api::V1::Albums', type: :request do
 
     context 'when the album already has the song' do
       before do
-        album.add_song!(added_song_id)
-        api_put "/albums/#{album_id}/delete_song", params: attributes
+        album.add_songs!([added_song_id])
+        api_put "/albums/#{album_id}/delete_songs", params: attributes
       end
 
       it 'should respond with no content' do
