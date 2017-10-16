@@ -119,14 +119,14 @@ RSpec.describe 'Api::V1::Albums', type: :request do
         expect(response).to have_http_status(204)
       end
 
-      it 'should add a new song to the album' do
+      it 'should add the new songs to the album' do
         album.reload
         expect(album.songs.count).to eq(2)
         expect(album.songs.last).to eq(new_song2)
       end
     end
 
-    context 'when the album already has the song' do
+    context 'when the album already has the songs' do
       before do
         album.add_songs!([new_song_id])
         api_put "/albums/#{album_id}/add_songs", params: attributes
@@ -150,29 +150,20 @@ RSpec.describe 'Api::V1::Albums', type: :request do
 
   describe 'PUT /albums/:id/delete_songs' do
     let!(:added_song) { create(:song, owner_id: artist.id) }
+    let!(:added_song2) { create(:song, owner_id: artist.id) }
+
     let(:added_song_id) { added_song.id }
+    let(:added_song_id2) { added_song2.id }
+
     let(:attributes) {
       {
-        song_ids: added_song_id
+        song_ids: "#{added_song_id}, #{added_song_id2}"
       }
     }
 
-    # context 'when the album does not have the song' do
-    #   before { api_put "/albums/#{album_id}/delete_song", params: attributes }
-    #
-    # it 'returns a validation failure message' do
-    #   expect(response.body)
-    #     .to match(/Validation failed: /)
-    # end
-    #
-    # it 'returns status code 422' do
-    #   expect(response).to have_http_status(422)
-    # end
-    # end
-
-    context 'when the album already has the song' do
+    context 'when the album already has the songs' do
       before do
-        album.add_songs!([added_song_id])
+        album.add_songs!([added_song_id, added_song_id2])
         api_put "/albums/#{album_id}/delete_songs", params: attributes
       end
 
@@ -184,7 +175,7 @@ RSpec.describe 'Api::V1::Albums', type: :request do
         expect(response).to have_http_status(204)
       end
 
-      it 'should delete the song from the album' do
+      it 'should delete the songs from the album' do
         album.reload
         expect(album.songs.count).to eq(0)
       end

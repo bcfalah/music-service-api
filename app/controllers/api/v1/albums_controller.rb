@@ -73,7 +73,7 @@ class Api::V1::AlbumsController < ApplicationController
   swagger_api :delete_songs do
     summary "Deletes one or many songs from the album"
     param :path, :id, :integer, :required, "Album Id"
-    param :form, "song_ids", :integer, :required, "Comma separated Ids of the songs to delete from the album"
+    param :form, "song_ids", :string, :required, "Comma separated Ids of the songs to delete from the album"
     response :no_content
     response :not_found
     response :unprocessable_entity

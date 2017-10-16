@@ -101,17 +101,21 @@ RSpec.describe 'Api::V1::Playlists', type: :request do
     end
   end
 
-  describe 'PUT /playlists/:id/add_song' do
+  describe 'PUT /playlists/:id/add_songs' do
     let!(:new_song) { create(:song, owner_id: artist.id) }
+    let!(:new_song2) { create(:song, owner_id: artist.id) }
+
     let(:new_song_id) { new_song.id }
+    let(:new_song_id2) { new_song2.id }
+
     let(:attributes) {
       {
-        song_id: new_song_id
+        song_ids: "#{new_song_id}, #{new_song_id2}"
       }
     }
 
-    context 'when the playlist does not have the song' do
-      before { api_put "/playlists/#{playlist_id}/add_song", params: attributes }
+    context 'when the playlist does not have the songs' do
+      before { api_put "/playlists/#{playlist_id}/add_songs", params: attributes }
 
       it 'should respond with no content' do
         expect(response.body).to be_empty
@@ -121,17 +125,17 @@ RSpec.describe 'Api::V1::Playlists', type: :request do
         expect(response).to have_http_status(204)
       end
 
-      it 'should add a new song to the playlist' do
+      it 'should add the new songs to the playlist' do
         playlist.reload
-        expect(playlist.songs.count).to eq(1)
-        expect(playlist.songs.last).to eq(new_song)
+        expect(playlist.songs.count).to eq(2)
+        expect(playlist.songs.last).to eq(new_song2)
       end
     end
 
-    context 'when the playlist already has the song' do
+    context 'when the playlist already has the songs' do
       before do
-        playlist.add_song!(new_song_id)
-        api_put "/playlists/#{playlist_id}/add_song", params: attributes
+        playlist.add_songs!([new_song_id, new_song_id2])
+        api_put "/playlists/#{playlist_id}/add_songs", params: attributes
       end
 
       it 'returns a validation failure message' do
@@ -143,26 +147,30 @@ RSpec.describe 'Api::V1::Playlists', type: :request do
         expect(response).to have_http_status(422)
       end
 
-      it 'should not add a new song to the playlist' do
+      it 'should not add the new songs to the playlist' do
         playlist.reload
-        expect(playlist.songs.count).to eq(1)
+        expect(playlist.songs.count).to eq(2)
       end
     end
   end
 
-  describe 'PUT /playlists/:id/delete_song' do
+  describe 'PUT /playlists/:id/delete_songs' do
     let!(:added_song) { create(:song, owner_id: artist.id) }
+    let!(:added_song2) { create(:song, owner_id: artist.id) }
+
     let(:added_song_id) { added_song.id }
+    let(:added_song_id2) { added_song2.id }
+
     let(:attributes) {
       {
-        song_id: added_song_id
+        song_ids: "#{added_song_id}, #{added_song_id2}"
       }
     }
 
-    context 'when the playlist already has the song' do
+    context 'when the playlist already has the songs' do
       before do
-        playlist.add_song!(added_song_id)
-        api_put "/playlists/#{playlist_id}/delete_song", params: attributes
+        playlist.add_songs!([added_song_id, added_song_id2])
+        api_put "/playlists/#{playlist_id}/delete_songs", params: attributes
       end
 
       it 'should respond with no content' do
@@ -173,7 +181,7 @@ RSpec.describe 'Api::V1::Playlists', type: :request do
         expect(response).to have_http_status(204)
       end
 
-      it 'should delete the song from the playlist' do
+      it 'should delete the songs from the playlist' do
         playlist.reload
         expect(playlist.songs.count).to eq(0)
       end

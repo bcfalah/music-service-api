@@ -80,7 +80,7 @@
             {
               "paramType": "form",
               "name": "song_ids",
-              "type": "integer",
+              "type": "string",
               "description": "Comma separated Ids of the songs to delete from the album",
               "required": true
             }

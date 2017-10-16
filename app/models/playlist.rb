@@ -4,11 +4,14 @@ class Playlist < ApplicationRecord
 
   validates_presence_of :name
 
-  def add_song!(song_id)
-    self.playlist_songs.create!(song_id: song_id)
+  def add_songs!(song_ids)
+    song_ids.each do |song_id|
+      self.playlist_songs.build(song_id: song_id)
+    end
+    self.save!
   end
 
-  def delete_song!(song_id)
-    self.playlist_songs.where(song_id: song_id).destroy_all
+  def delete_songs!(song_ids)
+    self.playlist_songs.where(song_id: song_ids).destroy_all
   end
 end

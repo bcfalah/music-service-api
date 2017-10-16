@@ -5,10 +5,10 @@
   "resourcePath": "playlists",
   "apis": [
     {
-      "path": "/api/v1/playlists/{id}/add_song",
+      "path": "/api/v1/playlists/{id}/add_songs",
       "operations": [
         {
-          "summary": "Adds a song to the playlist",
+          "summary": "Adds one or many songs to a playlist",
           "responseMessages": [
             {
               "code": 204,
@@ -36,22 +36,22 @@
             },
             {
               "paramType": "form",
-              "name": "song_id",
-              "type": "integer",
-              "description": "Id of the song to add to the playlist",
+              "name": "song_ids",
+              "type": "string",
+              "description": "Comma separated Ids of the songs to add to the playlist",
               "required": true
             }
           ],
-          "nickname": "Api::V1::Playlists#add_song",
+          "nickname": "Api::V1::Playlists#add_songs",
           "method": "put"
         }
       ]
     },
     {
-      "path": "/api/v1/playlists/{id}/delete_song",
+      "path": "/api/v1/playlists/{id}/delete_songs",
       "operations": [
         {
-          "summary": "Deletes a song from the playlist",
+          "summary": "Deletes one or many songs from the playlist",
           "responseMessages": [
             {
               "code": 204,
@@ -79,13 +79,13 @@
             },
             {
               "paramType": "form",
-              "name": "song_id",
-              "type": "integer",
-              "description": "Id of the song to delete from the playlist",
+              "name": "song_ids",
+              "type": "string",
+              "description": "Comma separated Ids of the songs to delete from the playlist",
               "required": true
             }
           ],
-          "nickname": "Api::V1::Playlists#delete_song",
+          "nickname": "Api::V1::Playlists#delete_songs",
           "method": "put"
         }
       ]

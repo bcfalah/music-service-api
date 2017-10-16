@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
       resources :playlists do
         member do
-          put :add_song
-          put :delete_song
+          put :add_songs
+          put :delete_songs
         end
       end
     end
